@@ -9,7 +9,7 @@ class Solution {
             return dp[c][n-1];
         }
         if (c == 'a') {
-            ans+= countVowelPermutationUtil(n-1, 'e')% (1000000007);
+            ans = (ans%(100000007) + countVowelPermutationUtil(n-1, 'e')% (1000000007)) % (1000000007);
         } else if (c == 'e') {
             ans= (ans%(1000000007) + countVowelPermutationUtil(n-1, 'a')% (1000000007)) % (1000000007);
             ans= (ans%(1000000007) + countVowelPermutationUtil(n-1, 'i')% (1000000007)) % (1000000007);
