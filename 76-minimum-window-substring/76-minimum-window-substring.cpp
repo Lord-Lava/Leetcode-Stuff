@@ -6,14 +6,12 @@ public:
         map<char,int>mp;
         for(auto it:t)mp[it]++;
         int count = mp.size();
-        bool fl = 0;
         while(j<n){
             if(mp.find(s[j]) != mp.end()){
                 mp[s[j]]--;
                 if(mp[s[j]] == 0)count--;
             }
             if(count == 0) {
-                fl=1;
                 while(count == 0) {
                     if(mp.find(s[i]) != mp.end()) {
                         if(mp[s[i]] < 0){
@@ -35,7 +33,7 @@ public:
             }
             j++;
         }
-        if(!fl)return "";
+        if(mini == INT_MAX)return "";
 
         return s.substr(start,end-start+1);
     }
