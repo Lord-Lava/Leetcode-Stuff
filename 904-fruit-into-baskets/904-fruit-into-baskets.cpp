@@ -10,11 +10,7 @@ public:
             if(mp[fruits[j]] == 1) {
                 count++;
             }
-            if(count<2) {
-                ans = max(ans,j-i+1);
-                j++;
-            }
-            else if(count == 2) {
+            if(count<=2) {
                 ans = max(ans,j-i+1);
                 j++;
             } else if(count>2) {
