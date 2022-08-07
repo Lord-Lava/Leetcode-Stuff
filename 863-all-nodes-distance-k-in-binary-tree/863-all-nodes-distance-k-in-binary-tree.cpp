@@ -8,7 +8,7 @@
  * };
  */
 class Solution {
-    void fun(map<TreeNode*, vector<TreeNode*>>&adj, TreeNode* root) {
+    void createAdjacency(unordered_map<TreeNode*, vector<TreeNode*>>&adj, TreeNode* root) {
         if(root == NULL) {
             return;
         }
@@ -20,11 +20,11 @@ class Solution {
             adj[root].push_back(root->right);
             adj[root->right].push_back(root);
         }
-        fun(adj ,root->left);
-        fun(adj ,root->right);
+        createAdjacency(adj ,root->left);
+        createAdjacency(adj ,root->right);
     }
     
-    void bfsDist(TreeNode* src, map<TreeNode*, vector<TreeNode*>>&adj, vector<int>& dist)     {
+    void bfsDist(TreeNode* src, unordered_map<TreeNode*, vector<TreeNode*>>&adj, vector<int>& dist)     {
         queue<TreeNode*>q;
         q.push(src);
         dist[src->val] = 0;
@@ -42,22 +42,13 @@ class Solution {
     }
 public:
     vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
-        map<TreeNode*, vector<TreeNode*>>adj;
-        fun(adj, root);
-        // for(auto i:adj) {
-        //     cout<<i.first->val<<" ";
-        //     for(auto it:i.second) {
-        //         cout<<it->val<<" ";
-        //     } cout<<endl;
-        // }
-        if (adj.size() == 0) return {};
-        TreeNode* src = target;
+        unordered_map<TreeNode*, vector<TreeNode*>>adj;
+        createAdjacency(adj, root);
         int n = adj.size();
+        if (n == 0) return {};
+        TreeNode* src = target;
         vector<int>dist(n, INT_MAX);
         bfsDist(src, adj, dist);
-        // for(auto it: dist){
-        //     cout<<it<<" ";
-        // }cout<<endl;
         vector<int>ans;
         for(int i =0;i<dist.size(); i++) {
             if(dist[i] == k){
