@@ -1,6 +1,5 @@
 class Solution {
     int dp[102];
-    const int OFFSET = 2;
     int rec(int level, vector<int>&nums) {
         //base case
         if(level >= nums.size()) return 0;
