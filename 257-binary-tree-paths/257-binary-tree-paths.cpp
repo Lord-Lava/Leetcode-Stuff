@@ -10,61 +10,38 @@
  * };
  */
 class Solution {
-    
-    vector<vector<int>> ans;
-    void rec(TreeNode* root, vector<int> temp){
-        if(root->left == NULL and root->right==NULL){
-            temp.push_back(root->val);
-            ans.push_back(temp);
-            temp.pop_back();
+    void rec(TreeNode* root,vector<int> &s,vector<vector<int>>&v) {
+        if(root->left == NULL && root->right == NULL) {
+            s.push_back(root->val);
+            v.push_back(s);
             return;
         }
-        if(root->left!=NULL){
-            temp.push_back(root->val);
-            rec(root->left,temp);
-            temp.pop_back();
+        s.push_back(root->val);
+        if(root->left!=NULL) {
+            rec(root->left, s, v);
+            s.pop_back();
         }
-        if(root->right!=NULL){
-            temp.push_back(root->val);
-            rec(root->right,temp);
+        if(root->right!=NULL) {
+            rec(root->right, s, v);
+            s.pop_back();
         }
-        
     }
-    
-    
-    // void rec(TreeNode* root,string &s,vector<string>&v, int ctr) {
-    //     if(root->left == NULL && root->right == NULL) {
-    //         ctr++;
-    //         s+=(root->val) + '0';
-    //         v.push_back(s);
-    //         s.clear();
-    //         s+=ctr+'0';
-    //         s+="->";
-    //         return;
-    //     }
-    //     s+=(root->val) + '0';
-    //     s+="->";
-    //     if(root->left!=NULL)
-    //     rec(root->left, s, v, 0);
-    //     if(root->right!=NULL)
-    //     rec(root->right, s, v, 0);
-    // }
 public:
     vector<string> binaryTreePaths(TreeNode* root) {
         if(root == NULL) return {};
-        // vector<string> v;
-        rec(root,{});
-        // string x;
-        vector<string> a;
-        for(int i=0;i<ans.size();i++){
-            string x;
-            for(int j=0;j<ans[i].size()-1;j++){
-                x += to_string(ans[i][j]) + "->";
+        vector<vector<int>> v;
+        vector<string>ans;
+        vector<int>s;
+        rec(root,s,v);
+        for(auto it: v) {
+            int m = it.size();
+            string temp;
+            for(int j = 0;j<m-1;j++) {
+                temp+=to_string(it[j]) + "->";
             }
-            x += to_string(ans[i][ans[i].size()-1]);
-            a.push_back(x);
-            cout<<endl;
+            temp+=to_string(it[m-1]);
+            ans.push_back(temp);
         }
-        return a;
+        return ans;
     }
 };
