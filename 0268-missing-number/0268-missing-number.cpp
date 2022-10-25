@@ -1,15 +1,20 @@
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
-        int numXor = 0;
+        sort(nums.begin(), nums.end());
         int n = nums.size();
-        for(int& num: nums) {
-            numXor ^= num;
+        int lo = 0;
+        int hi = n-1;
+        int ans = n;
+        while(lo<=hi) {
+            int mid = lo+(hi-lo)/2;
+            if(nums[mid] > mid) {
+                ans = mid;
+                hi = mid-1;
+            } else {
+                lo = mid+1;
+            }
         }
-        int totalXor = 0;
-        for(int i = 0; i <= n; i++) {
-            totalXor ^= i;
-        }
-        return numXor ^ totalXor;
+        return ans;
     }
 };
