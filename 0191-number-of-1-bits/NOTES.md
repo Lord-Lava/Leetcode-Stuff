@@ -1,1 +1,1 @@
-​
+n = n & (n-1); // drops the least significant/lowest set bit
