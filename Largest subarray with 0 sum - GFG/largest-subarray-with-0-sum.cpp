@@ -31,10 +31,6 @@ class Solution{
                 ans = max(ans, (i - mp[pref[i]]) );
             }
         }
-        
-        // for(int i =0;i<n;i++) {
-        //     cout<<pref[i]<<" ";
-        // }cout<<endl;
         return ans;
     }
 };
