@@ -42,10 +42,10 @@ class Solution
        
        int i = low, j = high;
        while(i<pivotIndex && j>pivotIndex) {
-           while(arr[i] <= pivot) {
+           while(arr[i] <= arr[pivotIndex]) {
                i++;
            }
-           while(arr[j] > pivot) {
+           while(arr[j] > arr[pivotIndex]) {
                j--;
            }
            if(i<pivotIndex && j>pivotIndex) {
